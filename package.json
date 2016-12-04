@@ -1,0 +1,35 @@
+{
+  "name": "generator-komodo-mean",
+  "version": "1.0.0",
+  "description": "yeoman generator for simple MEAN stack application",
+  "scripts": {
+    "test": "gulp generateDependencies:test && gulp installDependencies && gulp build && gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KomodoTech/generator-komodo-mean.git"
+  },
+  "keywords": [
+    "MEAN",
+    "Mongodb",
+    "Express",
+    "Angular 2",
+    "Node",
+    "yeoman-generator"
+  ],
+  "author": "alexandre leibler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KomodoTech/generator-komodo-mean/issues"
+  },
+  "homepage": "https://github.com/KomodoTech/generator-komodo-mean#readme",
+  "dependencies": {
+    "yeoman-generator": "^0.24.1"
+  },
+  "devDependencies": {
+  },
+  "files": [
+    "app",
+    "router"
+  ]
+}
