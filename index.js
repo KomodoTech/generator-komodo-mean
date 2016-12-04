@@ -1,5 +1,7 @@
+'use strict';
 var generators = require('yeoman-generator');
 var _ = require('lodash');
+var path = require('path');
 
 /* Customize Yeoman Generator */
 module.exports = generators.Base.extend({
@@ -15,6 +17,8 @@ module.exports = generators.Base.extend({
         this.option('pug');
         this.templateExtension = (this.options.pug ? ".pug" : ".html");
 
+        this.option('gulp');
+
         this.option('mocha');
 
         this.option('mongoose');
@@ -25,9 +29,10 @@ module.exports = generators.Base.extend({
 
         //ARGUMENTS & CORRESPONDING VARIABLES
         
-        //TODO: If this is required then don't ask for it in the prompt
-        this.argument('appname', { type: String, required: true });
-        this.appname = _.camelCase(this.appname);
+        // If user did not provide app name as argument create a sensible default
+        this.argument('appname', { type: String, required: false });
+        this.appname = this.appname || path.basename(process.cwd());
+        this.appname = _.camelCase(this.appname); // as far as I can tell the camelCase method takes care of all the details that used to require lodash's slugify and humanize methods
     },
 
     // Uses inquirer.js async promises
@@ -39,7 +44,6 @@ module.exports = generators.Base.extend({
                     name: 'username',
                     message: 'What is your Github username?',
                     store: true // Will set default to whatever was used last time 
-
                 },
                 {
                     type: 'input',
@@ -57,6 +61,12 @@ module.exports = generators.Base.extend({
                     type: 'confirm',
                     name: 'pug',
                     message: 'Would you like to use Pug/Jade for templating?',
+                    store: true
+                },
+                {
+                    type: 'confirm',
+                    name: 'gulp',
+                    message: 'Would you like to use Gulp to manage your project?',
                     store: true
                 },
                 {
@@ -91,10 +101,13 @@ module.exports = generators.Base.extend({
             this.log('app name: ', answers.name);
             this.log('typescript: ', answers.typescript);
             this.log('pug: ', answers.pug);
+            this.log('gulp: ', answers.gulp);
             this.log('mocha: ', answers.mocha);
             this.log('mongoose: ', answers.mongoose);
             this.log('passport: ', answers.passport);
             this.log('crud: ', answers.crud);
+
+
         }.bind(this));
     }
 });
