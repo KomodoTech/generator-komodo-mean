@@ -106,7 +106,38 @@ module.exports = generators.Base.extend({
             this.log('mongoose: ', answers.mongoose);
             this.log('passport: ', answers.passport);
             this.log('crud: ', answers.crud);
+            
+            if (answers.name) {
+                this.composeWith("komodo-mean:server", {
+                    options: {
+                        nested: true,
+                        appname: answers.name,
+                        mongoose: answers.mongoose,
+                        passport: answers.passport,
+                        crud: answers.crud
+                    }
+                },
+                {
+                    local: require.resolve("./../server")
+                });
 
+
+                this.composeWith("komodo-mean:client", {
+                    options: {
+                        nested: true,
+                        appname: answers.name,
+                        typescript: answers.typescript,
+                        pug: answers.pug
+                    }
+                },
+                {
+                    local: require.resolve("./../client")
+                });
+            }
+
+            else {
+                this.log('Invalid app name: ', answers.name);
+            }
 
         }.bind(this));
     }
