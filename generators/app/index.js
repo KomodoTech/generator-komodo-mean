@@ -10,7 +10,7 @@ module.exports = generators.Base.extend({
 
 
         //CUSTOM FLAGS & CORRESPONDING FILE EXTENSIONS
-        
+
         this.option('typescript');
         this.angularExtension = (this.options.typescript ? ".ts" : ".js");
 
@@ -28,7 +28,7 @@ module.exports = generators.Base.extend({
         this.option('crud');
 
         //ARGUMENTS & CORRESPONDING VARIABLES
-        
+
         // If user did not provide app name as argument create a sensible default
         this.argument('appname', { type: String, required: false });
         this.appname = this.appname || path.basename(process.cwd());
@@ -43,13 +43,13 @@ module.exports = generators.Base.extend({
                     type: 'input',
                     name: 'username',
                     message: 'What is your Github username?',
-                    store: true // Will set default to whatever was used last time 
+                    store: true // Will set default to whatever was used last time
                 },
                 {
                     type: 'input',
                     name: 'name',
                     message: 'What is your project\'s name?',
-                    default: this.appname // Default's to current dirname 
+                    default: this.appname // Default's to current dirname
                 },
                 {
                     type: 'confirm',
@@ -96,17 +96,17 @@ module.exports = generators.Base.extend({
             ]
         ).then(function(answers) {
             //NOTE: Use generator.log function instead of env specific methods (e.g. console.log)
+            // 
+            // this.log('user name: ', answers.username);
+            // this.log('app name: ', answers.name);
+            // this.log('typescript: ', answers.typescript);
+            // this.log('pug: ', answers.pug);
+            // this.log('gulp: ', answers.gulp);
+            // this.log('mocha: ', answers.mocha);
+            // this.log('mongoose: ', answers.mongoose);
+            // this.log('passport: ', answers.passport);
+            // this.log('crud: ', answers.crud);
 
-            this.log('user name: ', answers.username);
-            this.log('app name: ', answers.name);
-            this.log('typescript: ', answers.typescript);
-            this.log('pug: ', answers.pug);
-            this.log('gulp: ', answers.gulp);
-            this.log('mocha: ', answers.mocha);
-            this.log('mongoose: ', answers.mongoose);
-            this.log('passport: ', answers.passport);
-            this.log('crud: ', answers.crud);
-            
             if (answers.name) {
                 this.composeWith("komodo-mean:server", {
                     options: {
