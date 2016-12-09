@@ -1,30 +1,39 @@
 {
-  "name": "foodiedice",
-  "version": "1.0.0",
-  "description": "Angular app for MEAN stack foodie dice project",
+  "name": "<%= appname %>",
+  "version": "0.0.0",
+  "description": "<%= description %>",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tslint": "tslint -c tslint.json app/**/*.ts",
-    "postinstall": "typings install",
-    "typings": "typings"
+    "start": "ENV=prod DEBUG=server nodemon server",
+
+    <%_ if(filters.gulp) { -%>
+    "test": "gulp test",
+    "tslint": "gulp tslint",
+    <%_ } -%>
+
+    <%_ if(filters.typescript) { -%>
+    "postinstall": "./node_modules/.bin/typings install",
+    "typings": "typings",
+    <%_ } -%>
+
+
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sampeppard/foodie-dice.git"
+    "url": "git+https://github.com/<%= username %>/<%= appname %>.git"
   },
   "keywords": [
     "typescript",
     "angular2",
     "angular",
-    "foodie",
+    "<%= appname %>",
     "MEAN"
   ],
-  "author": "alexandre leibler, sam peppard, nicolas hurtado, zachary hedgepeth",
-  "license": "GPL-3.0",
+  "author": "<%= username %>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sampeppard/foodie-dice/issues"
+    "url": "https://github.com/<%= username %>/<%= appname %>/issues"
   },
-  "homepage": "https://github.com/sampeppard/foodie-dice#readme",
+  "homepage": "https://github.com/<%= username %>/<%= appname %>#readme",
   "dependencies": {
     "@angular/common": "^2.1.2",
     "@angular/compiler": "^2.1.2",

@@ -1,9 +1,10 @@
 {
   "name": "generator-komodo-mean",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "description": "yeoman generator for simple MEAN stack application",
+  "main": "generators/app/index.js",
   "scripts": {
-    "test": "gulp generateDependencies:test && gulp installDependencies && gulp build && gulp test"
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,6 @@
   },
   "devDependencies": {},
   "files": [
-    "generators/app",
-    "generators/server",
-    "generators/client"
+    "generators"
   ]
 }

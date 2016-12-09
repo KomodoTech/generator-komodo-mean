@@ -1,31 +1,33 @@
 'use strict';
-var generators = require('yeoman-generator');
+var yeoman = require('yeoman-generator');
 var _ = require('lodash');
 var path = require('path');
 
 /* Customize Yeoman Generator */
-module.exports = generators.Base.extend({
+module.exports = yeoman.Base.extend({
     constructor: function() {
-        generators.Base.apply(this, arguments);
+        yeoman.Base.apply(this, arguments);
 
 
-        //CUSTOM FLAGS & CORRESPONDING FILE EXTENSIONS
+        //CUSTOM FLAGS
 
-        this.option('typescript');
-        this.angularExtension = (this.options.typescript ? ".ts" : ".js");
+        //PORTS
+        this.option('dev-port', {
+            desc: 'Port to be used for development',
+            type: String,
+            defaults: '9000'
+        });
+        this.option('debug-port', {
+            desc: 'Port to be used for debugging',
+            type: String,
+            defaults: '5858'
+        });
+        this.option('prod-port', {
+            desc: 'Port to be used for production',
+            type: String,
+            defaults: '8080'
+        });
 
-        this.option('pug');
-        this.templateExtension = (this.options.pug ? ".pug" : ".html");
-
-        this.option('gulp');
-
-        this.option('mocha');
-
-        this.option('mongoose');
-
-        this.option('passport');
-
-        this.option('crud');
 
         //ARGUMENTS & CORRESPONDING VARIABLES
 
@@ -34,6 +36,7 @@ module.exports = generators.Base.extend({
         this.appname = this.appname || path.basename(process.cwd());
         this.appname = _.camelCase(this.appname); // as far as I can tell the camelCase method takes care of all the details that used to require lodash's slugify and humanize methods
     },
+
 
     // Uses inquirer.js async promises
     prompting: function() {
@@ -44,6 +47,12 @@ module.exports = generators.Base.extend({
                     name: 'username',
                     message: 'What is your Github username?',
                     store: true // Will set default to whatever was used last time
+                },
+                {
+                    type: 'input',
+                    name: 'description',
+                    message: 'Please enter a description for your application',
+                    default: 'MEAN application'
                 },
                 {
                     type: 'input',
@@ -96,7 +105,7 @@ module.exports = generators.Base.extend({
             ]
         ).then(function(answers) {
             //NOTE: Use generator.log function instead of env specific methods (e.g. console.log)
-            // 
+            //
             // this.log('user name: ', answers.username);
             // this.log('app name: ', answers.name);
             // this.log('typescript: ', answers.typescript);
